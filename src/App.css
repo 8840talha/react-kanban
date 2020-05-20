@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  width: 95%;
+  margin: 15px auto;
+}
+.container-drag {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+.header {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  background-color: #E0E0E0;
+  width:100%;
+  text-align: center;
+}
+.draggable {
+  width: 200px;
+  height: 100px;
+  background-color: #fff;
+  margin: 5px auto;
+  line-height: 5em;
+  font-size: 10px;
+}
+
+

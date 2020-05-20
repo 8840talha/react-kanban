@@ -1,0 +1,15 @@
+.doneContainer {
+    position: absolute;
+    width: 300px;
+    height: 100vh;
+    right: 0;
+    top: 10;
+    background-color: #EEEEEE;
+  
+    border: 1px solid black;
+  }
+  .task-header {
+    display: inline-block;
+    background-color: skyblue;
+    width:100%;
+  }
