@@ -1,11 +1,5 @@
 import React from 'react'
 import './Todo.css';
-
-/**
-* @author
-* @function 
-**/
-
 const Todo = (props) => {
     return (
         <div className="todoContainer"

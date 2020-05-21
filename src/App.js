@@ -6,18 +6,19 @@ import Todo from './Components/Todo/Todo'
 
 export default class AppDragDropDemo extends Component {
   // Giving 3 default values for name and status
+
   state = {
     tasks: [
       { name: "React(default Todo with default status)", status: "Todo" },
       { name: "Node(default Todo with default status)", status: "Doing" },
-      { name: "Engineering(default Todo with default status)", status: "Done" }
+      { name: "Engineeringhuh(default Todo with default status)", status: "Done" }
     ],
     items: {
       name: '',
       status: ''
     }
   }
-
+  // Handling the input change event for adding new draggable items
   handleInput = (event) => {
     event.preventDefault();
     let items = this.state.items;
@@ -31,7 +32,7 @@ export default class AppDragDropDemo extends Component {
 
   }
 
-
+  // HAndling the onSubmit listener and updating the tasks array accordingly 
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state.items);
@@ -47,15 +48,20 @@ export default class AppDragDropDemo extends Component {
     })
   }
 
+  // using the onDragStart event to get the current element being dragged so that we can use that data to 
+  // match and drop successfully
   onDragStart = (ev, id) => {
     console.log('dragstart:', id);
     ev.dataTransfer.setData("id", id);
   }
-
+  // to make any div droppable we use onDragOver
   onDragOver = (ev) => {
     ev.preventDefault();
   }
 
+
+  // This onDrop method is responsible for the actual element being dropped into another div by updating
+  // status currently
   onDrop = (ev, cat) => {
     let id = ev.dataTransfer.getData("id");
     let tasks = this.state.tasks.filter((task) => {
@@ -65,6 +71,7 @@ export default class AppDragDropDemo extends Component {
       return task;
     });
 
+    // updating the tasks array by taking the comlete state and replacing it with the new array
     this.setState({
       ...this.state,
       tasks
@@ -73,24 +80,31 @@ export default class AppDragDropDemo extends Component {
 
 
   render() {
+    // using separate arrays to store items according to there respective  statuses
     var tasks = {
       Todo: [],
       Doing: [],
       Done: [],
     }
-
-    this.state.tasks.forEach((t) => {
-      tasks[t.status].push(
-        <div key={t.name}
-          onDragStart={(e) => this.onDragStart(e, t.name)}
+    // using for each loop to store the div in the respective arrays according to there status,and 
+    // using the name value assuming it to be unique 
+    // Note we can also use id for a real project
+    // setting draggable to true to make the div draggable
+    this.state.tasks.forEach((tsk) => {
+      tasks[tsk.status].push(
+        <div key={tsk.name}
+          onDragStart={(e) => this.onDragStart(e, tsk.name)}
           draggable
           className="draggable">
-          {t.name}
+          {tsk.name}
         </div>
       );
     });
 
+
     return (
+      // rendering our divs by making there separate components and using the status property to make the actual drop happen 
+
       <div>
         <h1 className='header'>Kanban Board</h1>
         <div className="container-drag">
@@ -107,3 +121,6 @@ export default class AppDragDropDemo extends Component {
     );
   }
 }
+
+// Also we pass the OnDragOver Event and onDrop event so that every block becomes droppable and
+// gets  the actual drop happening  
